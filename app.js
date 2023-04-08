@@ -12,6 +12,10 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
+app.get('/:URLId', (req, res) => {
+  
+} )
+
 app.listen(port, ()=> {
   console.log(`The web is on local:${port}`)
 })
