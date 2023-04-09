@@ -3,9 +3,14 @@
     <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png"
       class="card-img-top" alt="chain">
     <div class="card-body">
-      <form action="POST" class="d-flex flex-column">
+      <form action="/" class="d-flex flex-column" method="POST">
         <label for="originalURL" class="form-label">Original URL</label>
-        <input type="text" placeholder="Your link..." id="originalURL">
+        <input type="text" placeholder="Your link..." id="originalURL" name="originalURL" value="{{originalURL}}">
+        {{#if shortenURL}}
+        <div class="alert alert-info" role="alert">
+          <span class="mr-2">Your shorten URL is:</span> <code>http://localhost:3000/{{shortenURL}}</code>
+        </div>
+        {{/if}}
         <button type="submit" class="btn btn-primary">Shorten!</button>
       </form>
     </div>

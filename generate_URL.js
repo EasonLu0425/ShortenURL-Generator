@@ -1,5 +1,4 @@
 const urlData = []
-const url = `www.google.com`
 function generateShortenURL (URL) {
   // receive original url and check if the url is already in the data
   const exsistURL = urlData.find(element => element.originalURL === URL)
@@ -10,7 +9,7 @@ function generateShortenURL (URL) {
   const URLId = generateID()
   // check if URLId is already exsist
   if (urlData.find(element => element.shortenURL === URLId)) {
-    return generateShortenURL(URL)
+    return generateShortenURL
   }
   
   urlData.push({
@@ -34,4 +33,7 @@ function generateID() {
   return Id
 }
 
-generateShortenURL(url)
+generateShortenURL()
+
+
+module.exports = generateShortenURL
