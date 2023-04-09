@@ -1,24 +1,24 @@
-const urlData = []
+// const urlData = []
 function generateShortenURL (URL) {
   // receive original url and check if the url is already in the data
-  const exsistURL = urlData.find(element => element.originalURL === URL)
-  if (exsistURL) {
-    return exsistURL.shortenURL
-  }
+  // const exsistURL = urlData.find(element => element.originalURL === URL)
+  // if (exsistURL) {
+  //   return exsistURL.shortenURL
+  // }
   // generate a random id for shorten url
   const URLId = generateID()
   // check if URLId is already exsist
-  if (urlData.find(element => element.shortenURL === URLId)) {
-    return generateShortenURL
-  }
+  // if (urlData.find(element => element.shortenURL === URLId)) {
+  //   return generateShortenURL
+  // }
   
-  urlData.push({
-    originalURL: URL,
-    shortenURL: URLId
-  })
+  // urlData.push({
+  //   originalURL: URL,
+  //   shortenURL: URLId
+  // })
 
-  console.log(urlData)
-  console.log(`this will generate shorten url`)
+  // console.log(urlData)
+  // console.log(`this will generate shorten url`)
   return URLId
 }
 
