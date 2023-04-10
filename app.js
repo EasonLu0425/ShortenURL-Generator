@@ -1,35 +1,18 @@
-const express = require('express')
-const exphbs = require('express-handlebars')
+const express = require("express")
+const exphbs = require("express-handlebars")
+require("./config/mongoose")
+
+const URL = require("./models/url")
+const shortenURL = require("./generate_URL")
+
 const app = express()
 const port = 3000
-const generateURL = require('./generate_URL')
-const bodyParser = require('body-parser')
-const URL = require('./models/url')
 
-const mongoose = require('mongoose')
-const dotenv = require("dotenv");
-
-dotenv.config()
-mongoose.connect( process.env.MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
-
-
-app.engine('handlebars', exphbs({defaultLayout: 'main'}))
-app.set('view engine', 'handlebars')
-
-app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }))
+app.set("view engine", "handlebars")
+app.use(express.static("public"))
 
 app.get('/', (req,res) => {
   res.render('index')
@@ -54,9 +37,18 @@ app.post('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.get('/:URLId', (req, res) => {
-  
-} )
+app.get("/:shortenURL", (req, res) => {
+  const { shortenURL } = req.params
+
+  URL.findOne({ shortenURL })
+    .then(data => {
+      if (!data) {
+        return res.render("nourl",)
+      }
+      res.redirect(data.originalURL)
+    })
+    .catch(error => console.error(error))
+})
 
 app.listen(port, ()=> {
   console.log(`The web is on local:${port}`)
