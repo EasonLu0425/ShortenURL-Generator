@@ -3,7 +3,7 @@ const exphbs = require("express-handlebars")
 require("./config/mongoose")
 
 const URL = require("./models/url")
-const shortenURL = require("./generate_URL")
+const generateURL = require("./generate_URL")
 
 const app = express()
 const port = 3000
@@ -13,6 +13,9 @@ app.use(express.urlencoded({ extended: true }))
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
 app.use(express.static("public"))
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
 
 app.get('/', (req,res) => {
   res.render('index')
